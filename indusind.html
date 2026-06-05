@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IndusInd Credit Cards — Priyanka Godhwani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inconsolata:wdth,wght@100,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #141414;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      color: #f0f0f0;
+      overflow-x: hidden;
+    }
+
+    .px-cross { position: fixed; width: 39px; height: 39px; pointer-events: none; z-index: 0; }
+    .px-cross span { position: absolute; width: 13px; height: 13px; }
+    .px-cross .t { top: 0; left: 13px; }
+    .px-cross .r { top: 13px; left: 26px; }
+    .px-cross .l { top: 13px; left: 0; }
+    .px-cross .b { top: 26px; left: 13px; }
+    .px-cross .c { top: 13px; left: 13px; background: #141414 !important; }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    #deco-purple { top: 120px; right: 48px; animation: floatY 4s ease-in-out infinite; }
+    #deco-purple span.arm { background: #D8B400; }
+    #deco-orange { top: 480px; left: 32px; animation: floatY 4s ease-in-out infinite 1.4s; }
+    #deco-orange span.arm { background: #c9940a; }
+    #deco-pink   { top: 900px; right: 60px; animation: floatY 4s ease-in-out infinite 2.8s; }
+    #deco-pink   span.arm { background: #D8B400; }
+    #deco-purple2 { top: 1400px; left: 28px; animation: floatY 4s ease-in-out infinite 0.7s; }
+    #deco-purple2 span.arm { background: #D8B400; }
+
+    /* ── Sticky nav ── */
+    .cs-nav {
+      position: sticky; top: 16px; z-index: 100;
+      max-width: 900px; margin: 16px auto 0;
+      background: #1c1c1c;
+      border-radius: 16px;
+      padding: 16px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .cs-nav-title {
+      font-family: 'Poppins', sans-serif;
+      color: #D8B400; font-size: 24px; line-height: 1;
+    }
+    .cs-nav-back {
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wdth' 100;
+      font-weight: 500; color: #f7f7f7;
+      font-size: 18px; letter-spacing: 0.4px;
+      cursor: pointer; text-decoration: none;
+      background: none; border: none;
+    }
+    .cs-nav-back:hover { text-decoration: underline; }
+
+    .cs-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── Hero ── */
+    .cs-hero { margin-bottom: 0; }
+    .cs-hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 48px; line-height: 1.05;
+      font-weight: 400;
+      color: #f0f0f0; margin-bottom: 8px;
+    }
+    .cs-hero-tags {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; padding-top: 32px;
+    }
+    .cs-tag {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 500;
+      padding: 6px 16px; border-radius: 999px;
+    }
+    .cs-tag.blue   { background: rgba(216,180,0,0.15); color: #D8B400; }
+    .cs-tag.grey   { background: rgba(255,255,255,0.08); color: #aaa; }
+
+    .cs-hero-img {
+      width: 100%; border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      margin-bottom: 0;
+      max-height: 420px;
+    }
+    .cs-hero-img img {
+      width: 100%; height: 420px;
+      object-fit: contain; display: block;
+      border-radius: 20px;
+      background: #141414;
+    }
+
+    /* ── Meta row ── */
+    .cs-meta {
+      display: flex; gap: 0; flex-wrap: wrap;
+      background: #1c1c1c; border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
+    .cs-meta-item {
+      flex: 1; min-width: 140px;
+      padding: 20px 24px;
+      border-right: 1px solid #2a2a2a;
+    }
+    .cs-meta-item:last-child { border-right: none; }
+    .cs-meta-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px; font-weight: 500;
+      color: #BBBBBB; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .cs-meta-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px; font-weight: 600; color: #f0f0f0;
+    }
+
+    /* ── Section cards ── */
+    .cs-section {
+      background: #1c1c1c; border-radius: 24px;
+      padding: 36px 40px;
+      box-shadow: 0 3.666px 8px rgba(0,0,0,0.4);
+      margin-bottom: 24px;
+    }
+    .cs-section-label {
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wdth' 100;
+      font-size: 14px; font-weight: 500;
+      color: #BBBBBB; letter-spacing: 1.8px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .cs-section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px; color: #f0f0f0;
+      font-weight: 400;
+      margin-bottom: 20px; line-height: 1.1;
+    }
+    .cs-body {
+      font-size: 16px; line-height: 1.75;
+      color: #A4A4A4; font-weight: 400;
+    }
+    .cs-body + .cs-body { margin-top: 12px; }
+
+    /* ── Tiers ── */
+    .cs-tiers {
+      display: flex; gap: 12px; margin: 24px 0;
+      flex-wrap: wrap;
+    }
+    .cs-tier {
+      flex: 1; min-width: 200px;
+      border-radius: 16px; padding: 20px 22px;
+      position: relative;
+    }
+    .cs-tier.t1 { background: #141414; }
+    .cs-tier.t4 { background: #141414; }
+    .cs-tier-num {
+      font-family: 'Lora', serif;
+      font-size: 42px; color: rgba(100,16,235,0.15);
+      position: absolute; top: 10px; right: 18px;
+      line-height: 1;
+    }
+    .cs-tier-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px; color: #BBBBBB;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 6px; font-weight: 500;
+    }
+    .cs-tier-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px; font-weight: 600; color: #e8e8e8;
+    }
+    .cs-tier-abbr {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px; color: #A4A4A4; font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* ── Directions ── */
+    .cs-directions {
+      display: flex; gap: 14px; margin: 24px 0;
+      flex-wrap: wrap;
+    }
+    .cs-direction {
+      flex: 1; min-width: 220px;
+      border-radius: 20px; padding: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .cs-direction-swatch {
+      height: 120px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cs-direction-swatch.dark {
+      background: linear-gradient(135deg, #0d0d1a 0%, #1a1a3e 50%, #0a2a3a 100%);
+    }
+    .cs-direction-swatch.soft {
+      background: linear-gradient(135deg, #f9e4f7 0%, #fce4ec 50%, #fff0f6 100%);
+    }
+    .cs-direction-swatch.indic {
+      background: linear-gradient(135deg, #ff6b00 0%, #ffb300 50%, #e91e8c 100%);
+    }
+    .cs-direction-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      padding: 2px 0;
+    }
+    .cs-direction-label.dark { color: rgba(255,255,255,0.55); }
+    .cs-direction-label.soft { color: #c0006a; }
+    .cs-direction-label.indic { color: rgba(255,255,255,0.8); }
+    .cs-direction-body {
+      padding: 16px 18px;
+      background: #242424;
+    }
+    .cs-direction-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px; font-weight: 600;
+      color: #f0f0f0; margin-bottom: 4px;
+    }
+    .cs-direction-desc {
+      font-size: 13px; line-height: 1.5;
+      color: #A4A4A4;
+    }
+
+    /* ── Sprint steps ── */
+    .cs-sprint {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-top: 20px;
+    }
+    .cs-sprint-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; background: #141414; border-radius: 12px;
+    }
+    .cs-sprint-num {
+      font-family: 'Lora', serif;
+      font-size: 22px; color: rgba(164,164,164,0.35);
+      flex-shrink: 0; line-height: 1;
+    }
+    .cs-sprint-text {
+      font-size: 14px; line-height: 1.45;
+      color: #A4A4A4; font-weight: 400;
+    }
+
+    /* ── Goals ── */
+    .cs-goals {
+      display: flex; flex-direction: column; gap: 14px; margin-top: 20px;
+    }
+    .cs-goal {
+      display: flex; align-items: flex-start; gap: 18px;
+      padding: 20px 24px;
+      border-radius: 16px;
+    }
+    .cs-goal.g1 { background: #141414; }
+    .cs-goal.g2 { background: #141414; }
+    .cs-goal.g3 { background: #141414; }
+    .cs-goal-num {
+      font-family: 'Lora', serif;
+      font-size: 40px; color: rgba(164,164,164,0.25);
+      flex-shrink: 0; line-height: 1;
+    }
+    .cs-goal-text {
+      font-size: 16px; font-weight: 500;
+      color: #A4A4A4; line-height: 1.55;
+      padding-top: 6px;
+    }
+
+    /* ── AI / Deliverable cards ── */
+    .cs-ai-grid {
+      display: flex; flex-direction: column;
+      gap: 16px; margin-top: 20px;
+    }
+    .cs-ai-card {
+      border-radius: 16px; padding: 24px 22px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .cs-ai-card.c1 { background: #141414; }
+    .cs-ai-card.c2 { background: #141414; }
+    .cs-ai-card.c3 { background: #141414; }
+    .cs-ai-card.c4 { background: #141414; }
+    .cs-ai-card.c5 { background: #141414; }
+    .cs-ai-icon { font-size: 28px; line-height: 1; }
+    .cs-ai-title {
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px; font-weight: 500;
+      color: #BBBBBB; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .cs-ai-text {
+      font-size: 15px; line-height: 1.55;
+      color: #A4A4A4; font-weight: 400;
+    }
+
+    /* ── Journey phases ── */
+    .cs-journey {
+      display: flex; gap: 0; margin: 24px 0;
+      background: #141414; border-radius: 14px; overflow: hidden;
+      border: 1.5px solid #2a2a2a;
+    }
+    .cs-phase {
+      flex: 1; text-align: center;
+      padding: 18px 12px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px; font-weight: 500;
+      color: #D8B400; letter-spacing: 0.5px;
+      border-right: 1.5px solid #2a2a2a;
+      line-height: 1.3;
+    }
+    .cs-phase:last-child { border-right: none; }
+    .cs-phase-num {
+      font-family: 'Lora', serif;
+      font-size: 26px; color: rgba(164,164,164,0.3);
+      display: block; margin-bottom: 6px;
+    }
+
+    /* ── Resp list ── */
+    .cs-resp-list {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+      margin: 20px 0;
+    }
+    .cs-resp-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 20px; background: #141414;
+      border-radius: 12px; font-size: 15px; line-height: 1.5; color: #A4A4A4;
+    }
+    .cs-resp-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #D8B400; flex-shrink: 0; margin-top: 5px;
+    }
+
+    /* ── Divider ── */
+    .cs-divider {
+      height: 1px; background: linear-gradient(90deg, transparent, #2e3a58, transparent);
+      margin: 32px 0;
+    }
+
+    /* ── Side nav ── */
+    .cs-sidenav {
+      position: fixed; left: 28px; top: 50%;
+      transform: translateY(-50%);
+      z-index: 50; display: flex; flex-direction: column;
+    }
+    @media (max-width: 1459px) { .cs-sidenav { display: none; } }
+    .cs-sidenav ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .cs-sidenav-link {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 20px; font-weight: 500;
+      color: #555; text-decoration: none;
+      letter-spacing: 0.4px; padding: 7px 0;
+      transition: color 0.25s; white-space: nowrap;
+    }
+    .cs-sidenav-link::before {
+      content: ''; width: 6px; height: 6px;
+      border-radius: 50%; background: #333;
+      flex-shrink: 0; transition: background 0.25s, transform 0.25s;
+    }
+    .cs-sidenav-link.active { color: #D8B400; }
+    .cs-sidenav-link.active::before { background: #D8B400; transform: scale(1.5); }
+    .cs-sidenav-link:hover { color: #D8B400; }
+    .cs-sidenav-link:hover::before { background: #bbb; }
+
+    /* ── Footer ── */
+    .cs-footer {
+      background: #1c1c1c; border-radius: 24px;
+      padding: 36px 40px;
+      box-shadow: 0 3.666px 8px rgba(0,0,0,0.4);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+      margin-top: 40px;
+    }
+    .cs-footer-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px; font-weight: 400; color: #BBBBBB;
+    }
+    .cs-footer-links {
+      display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+    }
+    .cs-footer-link {
+      font-family: 'Inconsolata', monospace;
+      font-size: 16px; font-weight: 500;
+      color: #f7f7f7; text-decoration: none; letter-spacing: 0.4px;
+    }
+    .cs-footer-link:hover { text-decoration: underline; }
+    .cs-footer-back {
+      font-family: 'Inconsolata', monospace;
+      font-size: 16px; font-weight: 500;
+      color: #141414; background: #f5f5f5;
+      padding: 10px 22px; border-radius: 999px;
+      text-decoration: none; cursor: pointer;
+      border: none; white-space: nowrap;
+    }
+    .cs-footer-back:hover { background: #b89500; }
+
+    @media (max-width: 600px) {
+      .cs-hero-title { font-size: 36px; }
+      .cs-section { padding: 28px 24px; }
+      .cs-sprint { grid-template-columns: 1fr; }
+      .cs-tiers { flex-direction: column; }
+      .cs-directions { flex-direction: column; }
+      .cs-journey { flex-direction: column; }
+      .cs-phase { border-right: none; border-bottom: 1.5px solid #2a2a2a; }
+      .cs-phase:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="cs-nav">
+    <span class="cs-nav-title">IndusInd Credit Cards</span>
+    <a class="cs-nav-back" href="index.html">← Portfolio</a>
+  </nav>
+
+  <nav class="cs-sidenav">
+    <ul>
+      <li><a href="#section-about" class="cs-sidenav-link">About the Project</a></li>
+      <li><a href="#section-challenge" class="cs-sidenav-link">The Challenge</a></li>
+      <li><a href="#section-product" class="cs-sidenav-link">The Product</a></li>
+      <li><a href="#section-moodboard" class="cs-sidenav-link">Moodboarding</a></li>
+      <li><a href="#section-directions" class="cs-sidenav-link">Design Directions</a></li>
+      <li><a href="#section-deliverables" class="cs-sidenav-link">Deliverables</a></li>
+    </ul>
+  </nav>
+
+  <div class="cs-wrap">
+
+    <!-- Hero -->
+    <div class="cs-hero">
+      <h1 class="cs-hero-title">Redefining Luxury Fintech<br><span style="font-style:italic; color:#D8B400; font-weight:400; font-family:'Poppins',sans-serif;">with IndusInd</span></h1>
+      <div class="cs-hero-tags">
+        <span class="cs-tag blue">Fintech</span>
+        <span class="cs-tag grey">Micro-animations</span>
+      </div>
+      <div class="cs-hero-img">
+        <img src="card.png" alt="Premium Credit Cards with IndusInd" />
+      </div>
+    </div>
+
+    <!-- Meta row -->
+    <div class="cs-meta">
+      <div class="cs-meta-item">
+        <p class="cs-meta-label">Year</p>
+        <p class="cs-meta-value">2023</p>
+      </div>
+      <div class="cs-meta-item">
+        <p class="cs-meta-label">Agency</p>
+        <p class="cs-meta-value">Parallel</p>
+      </div>
+      <div class="cs-meta-item">
+        <p class="cs-meta-label">Clients</p>
+        <p class="cs-meta-value">Hyperface &amp; IndusInd</p>
+      </div>
+      <div class="cs-meta-item">
+        <p class="cs-meta-label">My Role</p>
+        <p class="cs-meta-value">Visual Design Lead</p>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="cs-section" id="section-about">
+      <p class="cs-section-label">About the Project</p>
+      <h3 class="cs-section-title">Two Companies, One Vision</h3>
+      <p class="cs-body">This project brought together two powerful players in the Indian fintech space to reimagine what a credit card experience could look like for the modern consumer.</p>
+      <div class="cs-divider"></div>
+      <div class="cs-tiers">
+        <div class="cs-tier t1" style="min-width: 260px;">
+          <span class="cs-tier-num">H</span>
+          <p class="cs-tier-name">Platform</p>
+          <p class="cs-tier-title">Hyperface</p>
+          <p class="cs-tier-abbr">Credit-Card-as-a-Service — enabling brands and banks to build co-branded, innovative credit card solutions</p>
+        </div>
+        <div class="cs-tier t4" style="min-width: 260px;">
+          <span class="cs-tier-num" style="color: rgba(180,120,0,0.18);">I</span>
+          <p class="cs-tier-name">Bank</p>
+          <p class="cs-tier-title">IndusInd Bank</p>
+          <p class="cs-tier-abbr">35 million+ banking customers across India — with an established premium card portfolio</p>
+        </div>
+      </div>
+      <img src="card.png" alt="IndusInd Premium Credit Card"
+        style="width:70%; display:block; border-radius:16px; margin-top:24px;" />
+    </div>
+
+    <!-- Challenge -->
+    <div class="cs-section" id="section-challenge">
+      <p class="cs-section-label">The Challenge</p>
+      <h3 class="cs-section-title">A Bit Dull, Honestly</h3>
+      <p class="cs-body">IndusInd Bank carries a strong premium identity — but their existing credit card app experience didn't match that promise. The design system felt flat, generic, and dated compared to the brand's aspirational positioning.</p>
+      <div class="cs-divider"></div>
+      <p class="cs-body">The brief was clear: <strong>establish a premium digital experience</strong> across IndusInd's credit card portfolio — one that felt worthy of the card itself.</p>
+      <div class="cs-goals">
+        <div class="cs-goal g1">
+          <span class="cs-goal-num">1</span>
+          <p class="cs-goal-text">Modernise the credit card upgrade UX — reduce drop-off and increase card activations</p>
+        </div>
+        <div class="cs-goal g2">
+          <span class="cs-goal-num">2</span>
+          <p class="cs-goal-text">Create a visual design language that communicates premium without being intimidating</p>
+        </div>
+        <div class="cs-goal g3">
+          <span class="cs-goal-num">3</span>
+          <p class="cs-goal-text">Build a scalable design system adaptable across campaigns, seasons, and card variants</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Product -->
+    <div class="cs-section" id="section-product">
+      <p class="cs-section-label">The Product</p>
+      <h3 class="cs-section-title">A Unified Credit Card App</h3>
+      <p class="cs-body">The team set out to build a consumer-facing application that lets users view and manage their IndusInd credit cards from a single, elegant interface. The app needed to handle a broad set of everyday card tasks without feeling complex or transactional.</p>
+      <p class="cs-body" style="margin-top: 12px;">Their end-to-end experience spans four key flows:</p>
+      <div class="cs-journey">
+        <div class="cs-phase"><span class="cs-phase-num">01</span>Card Activation</div>
+        <div class="cs-phase"><span class="cs-phase-num">02</span>Spend Tracking</div>
+        <div class="cs-phase"><span class="cs-phase-num">03</span>EMI &amp; Limits</div>
+        <div class="cs-phase"><span class="cs-phase-num">04</span>Offers &amp; Rewards</div>
+      </div>
+      <p class="cs-body" style="margin-top: 8px;">Each capability was designed to feel seamless and premium — not like a banking utility, but like a personal financial companion.</p>
+      <ul class="cs-resp-list" style="margin-top: 16px;">
+        <li><span class="cs-resp-dot"></span>View and manage spend across multiple IndusInd credit cards</li>
+        <li><span class="cs-resp-dot"></span>Track transactions and set custom spend limits</li>
+        <li><span class="cs-resp-dot"></span>Convert transactions to EMI with a few taps</li>
+        <li><span class="cs-resp-dot"></span>Access curated offers and card benefits at a glance</li>
+      </ul>
+    </div>
+
+    <!-- Moodboarding -->
+    <div class="cs-section" id="section-moodboard">
+      <p class="cs-section-label">Process</p>
+      <h3 class="cs-section-title">Moodboarding to Align Stakeholders</h3>
+      <p class="cs-body">Before any UI was designed, the team used moodboarding as a strategic tool — to align stakeholder perspectives, pressure-test aesthetic directions, and explore the full range of what "premium" could mean for IndusInd's diverse card user base.</p>
+      <div class="cs-sprint">
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">1</span>
+          <p class="cs-sprint-text">Gather visual references across fintech, luxury, and Indian consumer brands</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">2</span>
+          <p class="cs-sprint-text">Organise design elements, typography pairings, and colour palettes per direction</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">3</span>
+          <p class="cs-sprint-text">Present aesthetic directions to stakeholders and gather structured feedback</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">4</span>
+          <p class="cs-sprint-text">Analyse tone and resonance of each direction against IndusInd's brand values</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">5</span>
+          <p class="cs-sprint-text">Map audience segments to directions — premium vs. mass-affluent vs. aspirational</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">6</span>
+          <p class="cs-sprint-text">Converge on a final direction and define the design language for the product</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design Directions -->
+    <div class="cs-section" id="section-directions">
+      <p class="cs-section-label">Design Directions</p>
+      <h3 class="cs-section-title">Three Paths to Premium</h3>
+      <p class="cs-body">Three distinct aesthetic directions were developed and explored to capture different facets of what premium could mean for IndusInd's credit card experience.</p>
+      <div class="cs-directions">
+        <div class="cs-direction">
+          <div class="cs-direction-swatch dark">
+            <span class="cs-direction-label dark">Dark &amp; Modern</span>
+          </div>
+          <div class="cs-direction-body">
+            <p class="cs-direction-name">Dark &amp; Modern</p>
+            <p class="cs-direction-desc">Deep navy and obsidian backgrounds with gold accents — evoking exclusivity and sophistication. Inspired by luxury fintech apps and Black-tier card aesthetics.</p>
+          </div>
+        </div>
+        <div class="cs-direction">
+          <div class="cs-direction-swatch soft">
+            <span class="cs-direction-label soft">Soft &amp; Bubblegum</span>
+          </div>
+          <div class="cs-direction-body">
+            <p class="cs-direction-name">Soft &amp; Bubblegum</p>
+            <p class="cs-direction-desc">Pastel pinks, lavenders, and playful gradients — approachable and aspirational. Targeting younger, first-time premium card holders discovering lifestyle benefits.</p>
+          </div>
+        </div>
+        <div class="cs-direction">
+          <div class="cs-direction-swatch indic">
+            <span class="cs-direction-label indic">Indic &amp; Vibrant</span>
+          </div>
+          <div class="cs-direction-body">
+            <p class="cs-direction-name">Indic &amp; Vibrant</p>
+            <p class="cs-direction-desc">Saffron, marigold, and jewel tones rooted in Indian visual culture — bold, celebratory, and deeply resonant with India's festive and aspirational consumer spirit.</p>
+          </div>
+        </div>
+      </div>
+      <p class="cs-body" style="margin-top: 8px;">Each direction was accompanied by typography explorations, iconography styles, card skin concepts, and micro-animation references — giving stakeholders a complete picture before committing to a path.</p>
+    </div>
+
+    <!-- Deliverables -->
+    <div class="cs-section" id="section-deliverables">
+      <p class="cs-section-label">Output</p>
+      <h3 class="cs-section-title">What Was Designed &amp; Shipped</h3>
+      <p class="cs-body">The project resulted in a comprehensive end-to-end product design — from the design system foundation through to polished, production-ready screens across multiple card variants and contexts.</p>
+      <div class="cs-ai-grid">
+        <div class="cs-ai-card c1" style="flex-direction:row; align-items:flex-start; gap:20px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+            <span class="cs-ai-icon">🎨</span>
+            <p class="cs-ai-title">Enhanced Design System</p>
+            <p class="cs-ai-text">A rebuilt design system that elevated IndusInd's existing foundations — new type scales, refined colour tokens, premium component patterns, and a motion language for micro-interactions.</p>
+          </div>
+        </div>
+        <div class="cs-ai-card c2" style="flex-direction:row; align-items:flex-start; gap:20px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+            <span class="cs-ai-icon">📱</span>
+            <p class="cs-ai-title">Complete Product Design</p>
+            <p class="cs-ai-text">Full-coverage screens across all core flows — card activation, spend dashboard, transaction detail, limit controls, EMI conversion, and offer discovery — across multiple card variants.</p>
+          </div>
+        </div>
+        <div class="cs-ai-card c3" style="flex-direction:row; align-items:flex-start; gap:20px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+            <span class="cs-ai-icon">🪔</span>
+            <p class="cs-ai-title">Festive Mods — Diwali &amp; Christmas</p>
+            <p class="cs-ai-text">Seasonal design variations that adapted the core experience for India's two biggest gifting and spending moments — maintaining premium feel while embracing celebratory warmth.</p>
+          </div>
+        </div>
+        <div class="cs-ai-card c4" style="flex-direction:row; align-items:flex-start; gap:20px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+            <span class="cs-ai-icon">🔐</span>
+            <p class="cs-ai-title">Card Controls &amp; Tokenization</p>
+            <p class="cs-ai-text">Designed intuitive card control flows — freeze, unfreeze, set limits — alongside card tokenization journeys for secure digital payments via UPI and wallets.</p>
+          </div>
+        </div>
+        <div class="cs-ai-card c5" style="flex-direction:row; align-items:flex-start; gap:20px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+            <span class="cs-ai-icon">🚪</span>
+            <p class="cs-ai-title">Login &amp; Onboarding Journeys</p>
+            <p class="cs-ai-text">First-impression flows that set the premium tone from the very first screen — MPIN setup, biometric login, and card reveal moments designed to delight and build trust.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="cs-footer">
+      <span class="cs-footer-title">Collaborate with me :)</span>
+      <div class="cs-footer-links">
+        <a class="cs-footer-link" href="mailto:pgodhwani99@gmail.com">pgodhwani99@gmail.com</a>
+        <a class="cs-footer-back" href="index.html">← Back to Portfolio</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const navLinks = document.querySelectorAll('.cs-sidenav-link');
+    const sections = document.querySelectorAll('.cs-section[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '-10% 0px -60% 0px' });
+    sections.forEach(s => observer.observe(s));
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>

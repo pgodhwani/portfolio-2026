@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dell NCD — Priyanka Godhwani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inconsolata:wdth,wght@100,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f3f6ff;
+      background-image:
+        linear-gradient(rgba(89,104,194,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89,104,194,0.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+      color: #252525;
+      overflow-x: hidden;
+    }
+
+    /* ── Pixel crosses ── */
+    .px-cross { position: fixed; width: 39px; height: 39px; pointer-events: none; z-index: 0; }
+    .px-cross span { position: absolute; width: 13px; height: 13px; }
+    .px-cross .t { top: 0; left: 13px; }
+    .px-cross .r { top: 13px; left: 26px; }
+    .px-cross .l { top: 13px; left: 0; }
+    .px-cross .b { top: 26px; left: 13px; }
+    .px-cross .c { top: 13px; left: 13px; background: #f3f6ff !important; }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    #deco-purple { top: 120px; right: 48px; animation: floatY 4s ease-in-out infinite; }
+    #deco-purple span.arm { background: #007DB8; }
+    #deco-orange { top: 480px; left: 32px; animation: floatY 4s ease-in-out infinite 1.4s; }
+    #deco-orange span.arm { background: #ff6b00; }
+    #deco-pink   { top: 900px; right: 60px; animation: floatY 4s ease-in-out infinite 2.8s; }
+    #deco-pink   span.arm { background: #e43183; }
+    #deco-purple2 { top: 1400px; left: 28px; animation: floatY 4s ease-in-out infinite 0.7s; }
+    #deco-purple2 span.arm { background: #007DB8; }
+
+    /* ── Sticky nav ── */
+    .cs-nav {
+      position: sticky; top: 16px; z-index: 100;
+      max-width: 900px; margin: 16px auto 0;
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(169,180,255,0.35);
+    }
+    .cs-nav-title {
+      font-family: 'Lora', serif;
+      color: #007DB8; font-size: 24px; line-height: 1;
+    }
+    .cs-nav-back {
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wdth' 100;
+      font-weight: 500; color: #e9006f;
+      font-size: 18px; letter-spacing: 0.4px;
+      cursor: pointer; text-decoration: none;
+      background: none; border: none;
+    }
+    .cs-nav-back:hover { text-decoration: underline; }
+
+    /* ── Main wrapper ── */
+    .cs-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── Hero ── */
+    .cs-hero {
+      margin-bottom: 0;
+    }
+    .cs-hero-eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wdth' 100;
+      font-weight: 500; font-size: 16px;
+      color: #e9006f; letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .cs-hero-title {
+      font-family: 'Lora', serif;
+      font-size: 48px; line-height: 1.05;
+      font-weight: 400;
+      color: #252525; margin-bottom: 8px;
+    }
+    .cs-hero-sub {
+      font-family: 'Lora', serif;
+      font-size: 48px; color: #007DB8;
+      margin-bottom: 28px;
+    }
+    .cs-hero-tags {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px;
+    }
+    .cs-tag {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 500;
+      padding: 6px 16px; border-radius: 999px;
+    }
+    .cs-tag.blue   { background: #e8f5ff; color: #007db8; }
+    .cs-tag.purple { background: #e2e8ff; color: #007DB8; }
+    .cs-tag.pink   { background: #ffe0ef; color: #c0006a; }
+    .cs-tag.orange { background: #fff0e0; color: #b04a00; }
+    .cs-tag.grey   { background: #f0f0f0; color: #555; }
+
+    /* ── GIF hero image ── */
+    .cs-hero-img {
+      width: 100%; border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(169,180,255,0.45);
+      margin-bottom: 0;
+      max-height: 420px;
+    }
+    .cs-hero-img img {
+      width: 100%; height: 420px;
+      object-fit: cover; display: block;
+      border-radius: 20px;
+    }
+
+    /* ── Meta row ── */
+    .cs-meta {
+      display: flex; gap: 0; flex-wrap: wrap;
+      background: #fff; border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(169,180,255,0.3);
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
+    .cs-meta-item {
+      flex: 1; min-width: 140px;
+      padding: 20px 24px;
+      border-right: 1px solid #eef0ff;
+    }
+    .cs-meta-item:last-child { border-right: none; }
+    .cs-meta-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px; font-weight: 500;
+      color: #e9006f; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .cs-meta-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px; font-weight: 600; color: #252525;
+    }
+
+    /* ── Section cards ── */
+    .cs-section {
+      background: #fff; border-radius: 24px;
+      padding: 36px 40px;
+      box-shadow: 0 3.666px 8px rgba(169,180,255,0.4);
+      margin-bottom: 24px;
+    }
+    .cs-section-label {
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wdth' 100;
+      font-size: 14px; font-weight: 500;
+      color: #e9006f; letter-spacing: 1.8px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .cs-section-title {
+      font-family: 'Lora', serif;
+      font-size: 36px; color: #252525;
+      font-weight: 400;
+      margin-bottom: 20px; line-height: 1.1;
+    }
+    .cs-body {
+      font-size: 16px; line-height: 1.75;
+      color: #3a3a3a; font-weight: 400;
+    }
+    .cs-body + .cs-body { margin-top: 12px; }
+
+    /* ── Tiers ── */
+    .cs-tiers {
+      display: flex; gap: 12px; margin: 24px 0;
+      flex-wrap: wrap;
+    }
+    .cs-tier {
+      flex: 1; min-width: 200px;
+      border-radius: 16px; padding: 20px 22px;
+      position: relative;
+    }
+    .cs-tier.t1 { background: #e2e8ff; }
+    .cs-tier.t2 { background: #eef1ff; }
+    .cs-tier.t3 { background: #f3f5ff; }
+    .cs-tier-num {
+      font-family: 'Lora', serif;
+      font-size: 42px; color: rgba(100,16,235,0.15);
+      position: absolute; top: 10px; right: 18px;
+      line-height: 1;
+    }
+    .cs-tier-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px; color: #e9006f;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 6px; font-weight: 500;
+    }
+    .cs-tier-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px; font-weight: 600; color: #252525;
+    }
+    .cs-tier-abbr {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px; color: #007DB8; font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* ── Players ── */
+    .cs-players {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;
+    }
+    .cs-player {
+      background: #f3f6ff; border: 1.5px solid #bccaff;
+      border-radius: 12px; padding: 12px 20px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 20px; font-weight: 500; color: #007DB8;
+      letter-spacing: 2px;
+    }
+    .cs-player.highlight {
+      background: #007DB8; color: #fff;
+      border-color: #007DB8;
+    }
+
+    /* ── CHO responsibilities ── */
+    .cs-resp-list {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+      margin: 20px 0;
+    }
+    .cs-resp-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 20px; background: #f8f5ff;
+      border-radius: 12px; font-size: 15px; line-height: 1.5;
+    }
+    .cs-resp-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #007DB8; flex-shrink: 0; margin-top: 5px;
+    }
+
+    /* ── Journey phases ── */
+    .cs-journey {
+      display: flex; gap: 0; margin: 24px 0;
+      background: #f3f6ff; border-radius: 14px; overflow: hidden;
+      border: 1.5px solid #dde2ff;
+    }
+    .cs-phase {
+      flex: 1; text-align: center;
+      padding: 18px 12px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px; font-weight: 500;
+      color: #007DB8; letter-spacing: 0.5px;
+      border-right: 1.5px solid #dde2ff;
+      line-height: 1.3;
+    }
+    .cs-phase:last-child { border-right: none; }
+    .cs-phase-num {
+      font-family: 'Lora', serif;
+      font-size: 26px; color: #bccaff;
+      display: block; margin-bottom: 6px;
+    }
+
+    /* ── Sprint steps ── */
+    .cs-sprint {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-top: 20px;
+    }
+    .cs-sprint-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; background: #f8f5ff; border-radius: 12px;
+    }
+    .cs-sprint-num {
+      font-family: 'Lora', serif;
+      font-size: 22px; color: #bccaff;
+      flex-shrink: 0; line-height: 1;
+    }
+    .cs-sprint-text {
+      font-size: 14px; line-height: 1.45;
+      color: #3a3a3a; font-weight: 400;
+    }
+
+    /* ── Goals ── */
+    .cs-goals {
+      display: flex; flex-direction: column; gap: 14px; margin-top: 20px;
+    }
+    .cs-goal {
+      display: flex; align-items: flex-start; gap: 18px;
+      padding: 20px 24px;
+      border-radius: 16px;
+    }
+    .cs-goal.g1 { background: #eef7ff; }
+    .cs-goal.g2 { background: #f0f3ff; }
+    .cs-goal.g3 { background: #f8f0ff; }
+    .cs-goal-num {
+      font-family: 'Lora', serif;
+      font-size: 40px; color: rgba(100,16,235,0.2);
+      flex-shrink: 0; line-height: 1;
+    }
+    .cs-goal-text {
+      font-size: 16px; font-weight: 500;
+      color: #252525; line-height: 1.55;
+      padding-top: 6px;
+    }
+
+    /* ── AI solution cards ── */
+    .cs-ai-grid {
+      display: flex; flex-direction: column;
+      gap: 16px; margin-top: 20px;
+    }
+    .cs-ai-card {
+      border-radius: 16px; padding: 24px 22px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .cs-ai-card.c1 { background: #e8f5ff; }
+    .cs-ai-card.c2 { background: #f0f3ff; }
+    .cs-ai-card.c3 { background: #fff0e8; }
+    .cs-ai-card.c4 { background: #e8ffee; }
+    .cs-ai-icon {
+      font-size: 28px; line-height: 1;
+    }
+    .cs-ai-title {
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px; font-weight: 500;
+      color: #e9006f; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .cs-ai-text {
+      font-size: 15px; line-height: 1.55;
+      color: #252525; font-weight: 400;
+    }
+
+    /* ── Player images ── */
+    .cs-player-imgs {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-top: 20px;
+    }
+    .cs-player-img-item {
+      background: #f3f6ff; border-radius: 16px;
+      border: 1.5px solid #dde2ff;
+      display: flex; flex-direction: column;
+      align-items: center; padding: 16px 12px; gap: 10px;
+    }
+    .cs-player-img-item img {
+      width: 100%; max-width: 120px; height: auto;
+      border-radius: 10px; display: block;
+    }
+    .cs-player-img-item span {
+      font-family: 'Inconsolata', monospace;
+      font-size: 15px; font-weight: 500;
+      color: #007DB8; letter-spacing: 1px;
+    }
+    .cs-player-img-highlight {
+      background: #e2e8ff; border-color: #007DB8;
+    }
+    .cs-player-img-highlight span { color: #007DB8; font-weight: 700; }
+
+    /* ── Side nav ── */
+    .cs-sidenav {
+      position: fixed;
+      left: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (max-width: 1459px) { .cs-sidenav { display: none; } }
+    .cs-sidenav ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .cs-sidenav-link {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 20px; font-weight: 500;
+      color: #bbb; text-decoration: none;
+      letter-spacing: 0.4px;
+      padding: 7px 0;
+      transition: color 0.25s;
+      white-space: nowrap;
+    }
+    .cs-sidenav-link::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #dde2ff;
+      flex-shrink: 0;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .cs-sidenav-link.active { color: #007DB8; }
+    .cs-sidenav-link.active::before {
+      background: #007DB8;
+      transform: scale(1.5);
+    }
+    .cs-sidenav-link:hover { color: #007DB8; }
+    .cs-sidenav-link:hover::before { background: #bccaff; }
+
+    /* ── Divider ── */
+    .cs-divider {
+      height: 2px; background: linear-gradient(90deg, transparent, #bccaff, transparent);
+      margin: 32px 0;
+    }
+
+    /* ── Quote ── */
+    .cs-quote {
+      background: #007DB8; color: #fff;
+      border-radius: 20px; padding: 32px 36px;
+      margin-bottom: 24px;
+    }
+    .cs-quote-text {
+      font-family: 'Lora', serif;
+      font-size: 28px; line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .cs-quote-sub {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px; opacity: 0.75;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Footer ── */
+    .cs-footer {
+      background: #fff; border-radius: 24px;
+      padding: 36px 40px;
+      box-shadow: 0 3.666px 8px rgba(169,180,255,0.4);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+      margin-top: 40px;
+    }
+    .cs-footer-title {
+      font-family: 'Lora', serif;
+      font-size: 32px; color: #007DB8;
+    }
+    .cs-footer-links {
+      display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+    }
+    .cs-footer-link {
+      font-family: 'Inconsolata', monospace;
+      font-size: 16px; font-weight: 500;
+      color: #e9006f; text-decoration: none;
+      letter-spacing: 0.4px;
+    }
+    .cs-footer-link:hover { text-decoration: underline; }
+    .cs-footer-back {
+      font-family: 'Inconsolata', monospace;
+      font-size: 16px; font-weight: 500;
+      color: #fff; background: #007DB8;
+      padding: 10px 22px; border-radius: 999px;
+      text-decoration: none; cursor: pointer;
+      border: none; white-space: nowrap;
+    }
+    .cs-footer-back:hover { background: #520fbd; }
+
+    @media (max-width: 600px) {
+      .cs-hero-title { font-size: 42px; }
+      .cs-section { padding: 28px 24px; }
+      .cs-sprint { grid-template-columns: 1fr; }
+      .cs-ai-grid { grid-template-columns: 1fr; }
+      .cs-tiers { flex-direction: column; }
+      .cs-journey { flex-direction: column; }
+      .cs-phase { border-right: none; border-bottom: 1.5px solid #dde2ff; }
+      .cs-phase:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Sticky nav -->
+  <nav class="cs-nav">
+    <span class="cs-nav-title">Dell NCD Case Study</span>
+    <a class="cs-nav-back" href="index.html">← Portfolio</a>
+  </nav>
+
+  <!-- Side navigation -->
+  <nav class="cs-sidenav">
+    <ul>
+      <li><a href="#section-about" class="cs-sidenav-link">About the Client</a></li>
+      <li><a href="#section-context" class="cs-sidenav-link">Context</a></li>
+      <li><a href="#section-user" class="cs-sidenav-link">Primary User</a></li>
+      <li><a href="#section-process" class="cs-sidenav-link">Process</a></li>
+      <li><a href="#section-vision" class="cs-sidenav-link">Vision</a></li>
+      <li><a href="#section-solutions" class="cs-sidenav-link">Design Solutions</a></li>
+    </ul>
+  </nav>
+
+  <div class="cs-wrap">
+
+    <!-- Hero -->
+    <div class="cs-hero">
+      <h1 class="cs-hero-title">Bridging the Care Gap:<br><span style="font-style:italic; color:#007DB8; font-weight:400;">AI-Driven Product Design for Rural Healthcare</span></h1>
+      <div class="cs-hero-tags" style="padding-top:32px;">
+        <span class="cs-tag blue">AI driven design</span>
+        <span class="cs-tag purple">Visual Design</span>
+        <span class="cs-tag pink">Social Impact</span>
+        <span class="cs-tag orange">Design Sprint</span>
+        <span class="cs-tag grey">Product Design</span>
+      </div>
+      <div class="cs-hero-img">
+        <img src="hero-dell.png" alt="CHO with patients at rural health clinic" />
+      </div>
+    </div>
+
+    <!-- Meta row -->
+    <div class="cs-meta">
+      <div class="cs-meta-item">
+        <p class="cs-meta-label">Year</p>
+        <p class="cs-meta-value">2023</p>
+      </div>
+      <div class="cs-meta-item">
+        <p class="cs-meta-label">Agency</p>
+        <p class="cs-meta-value">Parallel</p>
+      </div>
+      <div class="cs-meta-item">
+        <p class="cs-meta-label">Client</p>
+        <p class="cs-meta-value">Dell NCD</p>
+      </div>
+      <div class="cs-meta-item">
+        <p class="cs-meta-label">My Role</p>
+        <p class="cs-meta-value">Design Sprint Lead</p>
+      </div>
+    </div>
+
+    <!-- Brief -->
+    <div class="cs-quote">
+      <p class="cs-quote-text">How can AI help with handling health screenings in rural India?</p>
+      <p class="cs-quote-sub">The central design question driving this sprint</p>
+    </div>
+
+    <!-- About -->
+    <div class="cs-section" id="section-about">
+      <p class="cs-section-label">About the Client</p>
+      <h3 class="cs-section-title">National NCD Portal</h3>
+      <p class="cs-body">National NCD Portal is a digital initiative built to help healthcare workers screen &amp; manage patients with NCDs with the primary objective of providing continuum of care to every Indian — with a special focus on rural India.</p>
+      <div class="cs-divider"></div>
+      <p class="cs-body">The goal: integrate AI capabilities with National NCD Portal to make users' workflow smoother and more effective across the country's rural healthcare infrastructure.</p>
+    </div>
+
+    <!-- Healthcare system -->
+    <div class="cs-section" id="section-context">
+      <p class="cs-section-label">Context</p>
+      <h3 class="cs-section-title">How the rural healthcare system works</h3>
+      <p class="cs-body">Healthcare in rural India operates through a tiered system with 3 major levels, each serving a different scope of the population.</p>
+      <div class="cs-tiers">
+        <div class="cs-tier t1">
+          <span class="cs-tier-num">1</span>
+          <p class="cs-tier-name">Tier 1</p>
+          <p class="cs-tier-title">Community Health Centres</p>
+          <p class="cs-tier-abbr">CHC</p>
+        </div>
+        <div class="cs-tier t2">
+          <span class="cs-tier-num">2</span>
+          <p class="cs-tier-name">Tier 2</p>
+          <p class="cs-tier-title">Primary Health Centres</p>
+          <p class="cs-tier-abbr">PHC</p>
+        </div>
+        <div class="cs-tier t3">
+          <span class="cs-tier-num">3</span>
+          <p class="cs-tier-name">Tier 3</p>
+          <p class="cs-tier-title">Sub-Health Centres</p>
+          <p class="cs-tier-abbr">SC</p>
+        </div>
+      </div>
+      <img src="funnel-dell.avif" alt="Dell NCD healthcare funnel diagram"
+        style="width:100%; border-radius:16px; margin: 20px 0 8px; display:block;" />
+      <p class="cs-body" style="margin-top:8px;">The main players across these tiers:</p>
+      <div class="cs-players">
+        <div class="cs-player">ASHA</div>
+        <div class="cs-player">ANM</div>
+        <div class="cs-player highlight">CHO</div>
+        <div class="cs-player">MO</div>
+      </div>
+      <div class="cs-player-imgs">
+        <div class="cs-player-img-item">
+          <img src="ASHA.avif" alt="ASHA" />
+          <span>ASHA</span>
+        </div>
+        <div class="cs-player-img-item">
+          <img src="ANM.avif" alt="ANM" />
+          <span>ANM</span>
+        </div>
+        <div class="cs-player-img-item cs-player-img-highlight">
+          <img src="CHO.avif" alt="CHO" />
+          <span>CHO</span>
+        </div>
+        <div class="cs-player-img-item">
+          <img src="MO.avif" alt="MO" />
+          <span>MO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The CHO -->
+    <div class="cs-section" id="section-user">
+      <p class="cs-section-label">Primary User</p>
+      <h3 class="cs-section-title">The CHO — Chief Health Officer</h3>
+      <div style="display:flex; gap:24px; align-items:flex-start; margin-top:4px;">
+        <div style="flex:1;">
+          <p class="cs-body">CHOs constitute around 80% of NCD app users, conducting a wide range of tasks on the app — making them the highest-impact target for AI integration.</p>
+          <ul class="cs-resp-list">
+            <li><span class="cs-resp-dot"></span>Screen people for NCDs &amp; Cancers</li>
+            <li><span class="cs-resp-dot"></span>Record RBS &amp; BP for everyone and do follow-ups for diagnosed beneficiaries</li>
+            <li><span class="cs-resp-dot"></span>Refer patients to doctors when required</li>
+            <li><span class="cs-resp-dot"></span>Handle a wide range of admin &amp; reporting tasks on the app</li>
+          </ul>
+        </div>
+        <img src="CHO-laugh.avif" alt="CHO laughing" style="width:180px; border-radius:16px; flex-shrink:0; align-self:center;" />
+      </div>
+      <p class="cs-body" style="margin-top: 20px; margin-bottom: 12px;">Their end-to-end journey covers four key phases:</p>
+      <div class="cs-journey">
+        <div class="cs-phase"><span class="cs-phase-num">01</span>Enrolment</div>
+        <div class="cs-phase"><span class="cs-phase-num">02</span>Screening</div>
+        <div class="cs-phase"><span class="cs-phase-num">03</span>Rescreening</div>
+        <div class="cs-phase"><span class="cs-phase-num">04</span>Admin &amp;<br>Reporting</div>
+      </div>
+    </div>
+
+    <!-- Design Sprint -->
+    <div class="cs-section" id="section-process">
+      <p class="cs-section-label">Process</p>
+      <h3 class="cs-section-title">The Design Sprint</h3>
+      <p class="cs-body">A structured sprint with the Dell NCD team to identify the highest-value AI opportunities and design viable concepts for the existing platform.</p>
+      <div class="cs-sprint">
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">1</span>
+          <p class="cs-sprint-text">Introduction &amp; Setting the vision</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">2</span>
+          <p class="cs-sprint-text">Walkthrough of CHO Journey</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">3</span>
+          <p class="cs-sprint-text">2-year goal setting</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">4</span>
+          <p class="cs-sprint-text">Pain points &amp; Desires for CHOs</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">5</span>
+          <p class="cs-sprint-text">Prioritising Problems to Solve</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">6</span>
+          <p class="cs-sprint-text">AI Ideation with cards</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">7</span>
+          <p class="cs-sprint-text">Concept Generation</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">8</span>
+          <p class="cs-sprint-text">Technical &amp; Ethical Considerations</p>
+        </div>
+        <div class="cs-sprint-item">
+          <span class="cs-sprint-num">9</span>
+          <p class="cs-sprint-text">Prioritising Concepts to Design</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-top:24px;">
+        <img src="sprint-img-1.avif" alt="Design Sprint session 1" style="width:100%; border-radius:14px; display:block;" />
+        <img src="sprint-img-2.avif" alt="Design Sprint session 2" style="width:100%; border-radius:14px; display:block;" />
+        <img src="sprint-img-3.avif" alt="Design Sprint session 3" style="width:100%; border-radius:14px; display:block;" />
+      </div>
+    </div>
+
+    <!-- 2-year goals -->
+    <div class="cs-section" id="section-vision">
+      <p class="cs-section-label">Vision</p>
+      <h3 class="cs-section-title">2-Year Goals</h3>
+      <p class="cs-body">The sprint aligned on three north-star outcomes for what the NCD platform would look like two years out.</p>
+      <div class="cs-goals">
+        <div class="cs-goal g1">
+          <span class="cs-goal-num">1</span>
+          <p class="cs-goal-text">Tech interactions will be invisible — data capture happens seamlessly in the background</p>
+        </div>
+        <div class="cs-goal g2">
+          <span class="cs-goal-num">2</span>
+          <p class="cs-goal-text">Patients will self-screen; CHOs will review and validate rather than manually record everything</p>
+        </div>
+        <div class="cs-goal g3">
+          <span class="cs-goal-num">3</span>
+          <p class="cs-goal-text">NCD app will identify anomalies and support more informed decisions for better patient outcomes</p>
+        </div>
+      </div>
+      <img src="HMWs-final.png" alt="How Might We statements" style="width:100%; border-radius:16px; margin-top:24px; display:block;" />
+    </div>
+
+    <!-- AI Solutions -->
+    <div class="cs-section" id="section-solutions">
+      <p class="cs-section-label">Output</p>
+      <h3 class="cs-section-title">AI Solutions Designed</h3>
+      <p class="cs-body">Four AI-powered capabilities were identified, designed and applied to the existing NCD Portal platform.</p>
+      <div class="cs-ai-grid">
+        <div class="cs-ai-card c1" style="flex-direction:row; align-items:center; gap:20px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+            <span class="cs-ai-icon">🎯</span>
+            <p class="cs-ai-title">Task Prioritisation</p>
+            <p class="cs-ai-text">AI prioritises tasks based on patient criticality — so CHOs always focus on the highest-risk cases first.</p>
+          </div>
+          <img src="dell-vid-1-hq.gif" alt="Task Prioritisation demo" style="width:259px; flex-shrink:0; border-radius:10px; display:block;" />
+        </div>
+        <div class="cs-ai-card c2" style="flex-direction:row; align-items:center; gap:20px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+            <span class="cs-ai-icon">📋</span>
+            <p class="cs-ai-title">Profile Summaries</p>
+            <p class="cs-ai-text">AI provides instant beneficiary profile summaries, reducing manual scrolling and information overload.</p>
+          </div>
+          <img src="dell-vid-2.gif" alt="Profile Summaries demo" style="width:259px; flex-shrink:0; border-radius:10px; display:block;" />
+        </div>
+        <div class="cs-ai-card c3" style="flex-direction:row; align-items:center; gap:20px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+            <span class="cs-ai-icon">🎙️</span>
+            <p class="cs-ai-title">Voice-to-Form</p>
+            <p class="cs-ai-text">AI transcribes voice input and auto-fills forms — removing the burden of manual data entry in the field.</p>
+          </div>
+          <img src="dell-vid-3.gif" alt="Voice-to-Form demo" style="width:259px; flex-shrink:0; border-radius:10px; display:block;" />
+        </div>
+        <div class="cs-ai-card c4" style="flex-direction:row; align-items:center; gap:20px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+            <span class="cs-ai-icon">💬</span>
+            <p class="cs-ai-title">Personalised Counselling</p>
+            <p class="cs-ai-text">AI suggests personalised counselling scripts for CHOs based on individual patient history and conditions.</p>
+          </div>
+          <img src="dell-vid-4.gif" alt="Personalised Counselling demo" style="width:259px; flex-shrink:0; border-radius:10px; display:block;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="cs-footer">
+      <span class="cs-footer-title">Collaborate with me :)</span>
+      <div class="cs-footer-links">
+        <a class="cs-footer-link" href="mailto:pgodhwani99@gmail.com">pgodhwani99@gmail.com</a>
+        <a class="cs-footer-back" href="index.html">← Back to Portfolio</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const navLinks = document.querySelectorAll('.cs-sidenav-link');
+    const sections = document.querySelectorAll('.cs-section[id]');
+
+    // Scroll spy via IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '-10% 0px -60% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Smooth scroll on click
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>

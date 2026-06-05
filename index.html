@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priyanka Godhwani — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Lora:wght@400;600&family=Inconsolata:wdth,wght@100,500&family=Poppins:wght@400&family=Handjet:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { width: 100%; background: #fff; overflow-x: hidden; }
+
+    /* ─────────────── LANDING ─────────────── */
+    #landing-section {
+      width: 100vw;
+      display: flex; align-items: flex-start; justify-content: center;
+      overflow: hidden; background: #429EFB;
+    }
+    #stage {
+      width: 1440px; height: 1020px;
+      position: relative; flex-shrink: 0;
+      transform-origin: top center;
+      overflow: visible;
+    }
+    #bg { position: absolute; inset: 0; background: linear-gradient(to bottom, #1D77D0, #7FC6FC); }
+    #grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    /* Cloud bottom */
+    #cloud-bottom {
+      position: absolute; bottom: 22px; left: 50%;
+      transform: translateX(-50%);
+      width: 100%; pointer-events: none;
+      display: flex; justify-content: center;
+    }
+    #cloud-bottom img { width: 100%; display: block; }
+
+    /* Navigation */
+    #nav-portfolio, #nav-about {
+      position: absolute;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wdth' 100;
+      font-weight: 500; color: #F5F5F5;
+      font-size: 24px; letter-spacing: 0.64px;
+      white-space: nowrap; cursor: pointer;
+    }
+    #nav-portfolio { left: 642px; top: 44px; transform: translateX(-50%); }
+    #nav-about     { left: 800px; top: 44px; transform: translateX(-50%); }
+
+    /* Pixel crosses */
+    .px-cross { position: absolute; width: 39px; height: 39px; }
+    .px-cross span { position: absolute; width: 13px; height: 13px; }
+    .px-cross .t { top: 0; left: 13px; }
+    .px-cross .r { top: 13px; left: 26px; }
+    .px-cross .l { top: 13px; left: 0; }
+    .px-cross .b { top: 26px; left: 13px; }
+    .px-cross .c { top: 13px; left: 13px; background: #fff !important; }
+
+    /* Landing crosses — shared size (26px / 9px) */
+    .lnd-cross { width: 26px; height: 26px; }
+    .lnd-cross span { width: 9px; height: 9px; }
+    .lnd-cross .t { top: 0;    left: 9px; }
+    .lnd-cross .r { top: 9px;  left: 18px; }
+    .lnd-cross .l { top: 9px;  left: 0; }
+    .lnd-cross .b { top: 18px; left: 9px; }
+    .lnd-cross .c { top: 9px;  left: 9px; background: #fff !important; }
+
+    #cross-purple  { left: 1099.5px; top: 216.5px; animation: floatY 4s ease-in-out infinite; }
+    #cross-orange  { left: 239.5px;  top: 466.5px; animation: floatY 4s ease-in-out infinite 1.3s; }
+    #cross-pink    { left: 319.5px;  top: 266.5px; animation: floatY 4s ease-in-out infinite 2.6s; }
+    #cross-teal    { left: 170px;    top: 620px;   animation: floatY 4s ease-in-out infinite 1.9s; }
+    #cross-orange2 { left: 1210px;   top: 510px;   animation: floatY 4s ease-in-out infinite 3.1s; }
+    #cross-pink2   { left: 560px;    top: 670px;   animation: floatY 4s ease-in-out infinite 2.1s; }
+
+    #cross-purple span.arm { background: #6410eb; }
+    #cross-orange span.arm,
+    #cross-orange2 span.arm { background: #ff6b00; }
+    #cross-pink span.arm,
+    #cross-pink2 span.arm   { background: #e43183; }
+    #cross-teal span.arm    { background: #00b4d8; }
+
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    /* Ticket */
+    #ticket-wrap {
+      position: absolute; left: 443px; top: 100px;
+      width: 508px; height: 365px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Hero bottom — tagline + pills */
+    #hero-bottom {
+      position: absolute; left: 0; right: 0; top: 475px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 16px;
+    }
+    .hero-tagline {
+      font-family: 'Handjet', monospace;
+      font-weight: 500; font-size: 32px;
+      color: #175389; letter-spacing: 0.64px;
+      text-align: center; line-height: 1.2;
+    }
+    .hero-pills {
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hero-pill {
+      padding: 4px 10px; border-radius: 14px;
+      font-family: 'Handjet', monospace;
+      font-weight: 400; font-size: 16px;
+      white-space: nowrap; cursor: default;
+      letter-spacing: 0.3px;
+    }
+    .hero-pill.purple { background: #e2e8ff; color: #6410eb; }
+    .hero-pill.grey   { background: #e1e1e1; color: #363636; }
+    .hero-pill a { color: inherit; text-decoration: none; }
+    .hero-pill a:hover { text-decoration: underline; }
+    .hero-pill-divider {
+      width: 1px; height: 22px;
+      background: rgba(255,255,255,0.55);
+      flex-shrink: 0;
+    }
+    .flip-outer {
+      transform: rotate(-5.33deg);
+      width: 508px; height: 365px;
+      flex-shrink: 0; perspective: 1200px; cursor: pointer;
+      animation: floatY 4s ease-in-out infinite 0.6s;
+    }
+    .flipper {
+      width: 508px; height: 365px;
+      position: relative; transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: center center;
+    }
+    .flip-outer:hover .flipper { transform: rotateY(180deg); }
+    .face {
+      position: absolute; top: 0; left: 0;
+      width: 508px; height: 365px;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    }
+    .face img { width: 100%; height: 100%; display: block; }
+    .face-back { transform: rotateY(180deg); }
+
+    /* ─────────────── PORTFOLIO ─────────────── */
+    #portfolio-section {
+      position: relative; width: 100vw; overflow: hidden;
+    }
+    #portfolio-stage {
+      position: absolute; top: 0; left: 0;
+      width: 1440px; height: 1250px;
+      transform-origin: top left;
+      background: linear-gradient(to bottom, #7DC5FB 0%, #F3F6FF 54%);
+    }
+    .p-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(89,104,194,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89,104,194,0.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    /* Portfolio pixel crosses */
+
+    /* Nav bars */
+    .p-nav {
+      position: absolute; left: 42px; width: 1356px;
+      background: transparent; border-radius: 0;
+      padding: 22px 48px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: none;
+    }
+    .p-nav-top    { top: 23px; }
+    .p-nav-bottom { top: 1190px; }
+    .p-nav-title {
+      font-family: 'Lobster', cursive;
+      color: #175389; font-size: 40px;
+      line-height: 1; white-space: nowrap;
+      transform: rotate(0.15deg);
+      display: inline-block;
+    }
+    .p-nav-link {
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wdth' 100;
+      font-weight: 500; color: #e9006f;
+      font-size: 32px; letter-spacing: 0.64px;
+      cursor: pointer; white-space: nowrap;
+      background: none; border: none;
+    }
+    .p-nav-arrow {
+      font-size: 26px; color: #252525;
+      transform: rotate(143deg); display: inline-block;
+    }
+
+    /* Cards container */
+    .p-cards {
+      position: absolute;
+      left: 50%; top: 155px;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column;
+      gap: 16px; align-items: center;
+    }
+    .p-row {
+      display: flex; gap: 28px;
+      align-items: flex-start; justify-content: center;
+    }
+
+    /* Card shells */
+    .p-card-outer {
+      background: #fff; border-radius: 24px;
+      padding: 20px; flex-shrink: 0;
+      box-shadow: none;
+    }
+    .p-card-inner {
+      border-radius: 12px; padding: 20px;
+      overflow: hidden; position: relative;
+    }
+    .p-card-inner.blue   { background: #f0faff; box-shadow: none; }
+    .p-card-inner.purple { background: #f0f3ff; }
+    .p-card-inner.yellow { background: #fef7cd; box-shadow: none; }
+    .p-card-inner.pink   {
+      background: #ffedef;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 100%;
+    }
+
+    /* Preview images / GIFs */
+    .p-gif {
+      width: 320px; height: 298px;
+      object-fit: cover; border-radius: 8px;
+      display: block; margin-bottom: 18px;
+    }
+    .p-gif-wide {
+      width: 100%; height: 220px;
+      object-fit: cover; border-radius: 8px;
+      display: block; margin-bottom: 14px;
+    }
+
+    /* Card info */
+    .p-card-info {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .p-card-logo-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+    .p-card-logo {
+      width: 58px; height: 58px; border-radius: 10px;
+      object-fit: cover; flex-shrink: 0;
+    }
+    .p-card-title {
+      font-family: 'Handjet', sans-serif;
+      font-size: 20px; color: #252525; line-height: 1.25;
+    }
+    .p-card-arrow {
+      font-size: 18px; color: #252525;
+      transform: rotate(7.65deg); display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Tags */
+    .p-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .p-tag {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px; padding: 4px 10px;
+      border-radius: 20px; white-space: nowrap;
+    }
+    .p-tag.blue   { background: #f1faff; color: #007db8; }
+    .p-tag.purple { background: #e2e8ff; color: #6410eb; }
+    .p-tag.yellow { background: #ffedac; color: #a66c00; }
+
+    /* NDA card */
+    .p-nda-label {
+      font-family: 'Handjet', sans-serif;
+      font-size: 22px; color: #252525;
+      text-align: center; margin-bottom: 20px;
+    }
+    .p-nda-img { width: 150px; height: auto; object-fit: contain; }
+
+    /* ─────────────── FOOTER ─────────────── */
+    #site-footer {
+      background: #fff;
+      padding: 36px 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+      box-shadow: 0 -3px 12px rgba(169,180,255,0.25);
+    }
+    .footer-title {
+      font-family: 'Handjet', sans-serif;
+      font-size: 32px; color: #007DB8;
+    }
+    .footer-links {
+      display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+    }
+    .footer-email {
+      font-family: 'Inconsolata', monospace;
+      font-size: 16px; font-weight: 500;
+      color: #e9006f; text-decoration: none; letter-spacing: 0.4px;
+    }
+    .footer-email:hover { text-decoration: underline; }
+
+    /* ─────────────── PLOTTING THE PIXELS ─────────────── */
+    #pixels-section {
+      position: relative; width: 100vw; overflow: hidden;
+    }
+    #pixels-stage {
+      position: absolute; top: 0; left: 0;
+      width: 1440px; height: 460px;
+      transform-origin: top left;
+      background: #E8FAFF;
+    }
+    .px-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    /* Title */
+    #pixels-title {
+      position: absolute; top: 48px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 8px; align-items: baseline;
+      white-space: nowrap;
+    }
+    #pixels-title-lobster {
+      font-family: 'Lobster', cursive;
+      font-size: 40px; color: #190040;
+    }
+    #pixels-title-mono {
+      font-family: 'Handjet', sans-serif;
+      font-size: 40px; font-weight: 400; color: #190040;
+    }
+
+    /* Cards row */
+    #pixels-cards {
+      position: absolute; top: 130px;
+      left: 50%; transform: translateX(-50%);
+      display: flex; gap: 34px; align-items: flex-start;
+    }
+    .px-card {
+      width: 230px; height: 234px;
+      background: #D3F1FF;
+      border-radius: 7px;
+      box-shadow: none;
+      padding: 24px 14px 14px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .px-card-text {
+      font-family: 'Handjet', sans-serif;
+      font-size: 17px; line-height: 1.3;
+      color: #252525;
+      position: relative; z-index: 1;
+    }
+    .px-card-text strong {
+      color: #00608f; font-weight: 600;
+    }
+    .px-card-img {
+      position: absolute;
+      left: -40px; top: 107px;
+      width: 298px; height: 206px;
+    }
+    .px-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .px-card-img-fit {
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 100%; height: 132px;
+    }
+    .px-card-img-fit img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; display: block; }
+
+    /* ─────────────── MORE WORKS ─────────────── */
+    #moreworks-section {
+      position: relative; width: 100vw; overflow: hidden;
+    }
+    #moreworks-stage {
+      position: absolute; top: 0; left: 0;
+      width: 1440px; height: 780px;
+      transform-origin: top left;
+      background: #FAF0FF;
+    }
+    .mw-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+    #mw-ellipse {
+      position: absolute; left: -2px; top: -223px;
+      width: 1554px; pointer-events: none; opacity: 0.6;
+    }
+    #mw-ellipse img { width: 100%; display: block; }
+
+    #mw-title {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      top: 48px;
+      font-family: 'Lobster', cursive;
+      font-size: 40px; color: #6410eb;
+      white-space: nowrap;
+    }
+
+    /* Cards row */
+    #mw-cards {
+      position: absolute; top: 130px;
+      left: 50%; transform: translateX(-50%);
+      display: flex; gap: 26px; align-items: flex-start;
+    }
+    .mw-card {
+      width: 420px;
+      display: flex; flex-direction: column;
+      box-shadow: none;
+    }
+    .mw-card-img {
+      width: 100%; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      padding: 11px 11px 44px;
+    }
+    .mw-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    #mw-card1-img { background: #ffffff; height: 267px; }
+    #mw-card2-img { background: #dcfdff; height: 267px; padding: 0; overflow: hidden; }
+    #mw-card2-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    #mw-card1-img img { object-fit: contain; }
+
+    .mw-card-body {
+      background: #fff;
+      padding: 26px;
+      display: flex; flex-direction: column; gap: 16px;
+      box-shadow: none;
+    }
+    .mw-card-title {
+      font-family: 'Handjet', sans-serif;
+      font-size: 22px; font-weight: 500;
+      color: #007db8; line-height: 1.2;
+    }
+    .mw-card-desc {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px; line-height: 1.6;
+      color: #3c3c3c;
+    }
+    .mw-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .mw-tag {
+      background: #f1faff;
+      color: #007db8;
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 14px;
+      white-space: nowrap;
+    }
+
+    /* ─────────────── ABOUT ME ─────────────── */
+    #about-section {
+      position: relative; width: 100vw; overflow: hidden;
+    }
+    #about-stage {
+      position: absolute; top: 0; left: 0;
+      width: 1440px; height: 1331px;
+      transform-origin: top left;
+      background: #f3fffc;
+    }
+    #about-bg { position: absolute; inset: 0; background: #f3fffc; }
+    .about-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(89,104,194,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89,104,194,0.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    /* Section titles */
+    .about-section-title {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      font-family: 'Lobster', cursive;
+      font-size: 40px; color: #6410eb;
+      white-space: nowrap;
+    }
+    #about-title-top  { top: 48px; }
+    #about-title-helper { top: 919px; }
+
+    /* Polaroids */
+    .polaroid {
+      position: absolute;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 10px 10px 40px 10px;
+    }
+    .polaroid img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    #pol-char {
+      left: 380px; top: 217px;
+      width: 194px; height: 199px;
+      transform: rotate(-8.23deg);
+      z-index: 1;
+    }
+    #pol-sprite {
+      left: 340px; top: 421px;
+      width: 234px; height: 234px;
+      transform: rotate(-17.49deg);
+      z-index: 1;
+    }
+    #pol-landscape {
+      left: 923px; top: 159px;
+      width: 222px; height: 272px;
+      transform: rotate(-6.19deg);
+    }
+    #pol-duck {
+      left: 926px; top: 431px;
+      width: 222px; height: 222px;
+      transform: rotate(18.18deg);
+    }
+
+    /* Centre bio card */
+    #about-bio-card {
+      position: absolute;
+      left: 50%; transform: translateX(-50%); top: 130px;
+      z-index: 2;
+      width: 449px;
+      background: #fff;
+      box-shadow: 0 3.5px 21px rgba(0,0,0,0.1);
+      padding: 26px;
+      display: flex; flex-direction: column; gap: 19px;
+    }
+    #about-bio-photo {
+      width: 100%; height: 223px; overflow: hidden;
+    }
+    #about-bio-photo img {
+      width: 100%; height: calc(100% + 120px);
+      object-fit: cover; object-position: center 30%;
+      display: block; margin-top: -120px;
+    }
+    #about-bio-text {
+      font-family: 'Handjet', sans-serif;
+      font-size: 18px; line-height: 1.5;
+      color: #3c3c3c;
+    }
+
+    /* Koki card */
+    #koki-card {
+      position: absolute;
+      left: 50%; top: 990px;
+      transform: translateX(-50%);
+      width: 587px;
+      background: #f0faff;
+      border-radius: 9px;
+      box-shadow: 0 2.8px 2.8px rgba(0,0,0,0.25);
+      padding: 17px;
+      display: flex; align-items: center; gap: 17px;
+      overflow: hidden;
+    }
+    #about-ellipse-bg {
+      position: absolute; left: -100px; top: -250px;
+      width: 737px; pointer-events: none;
+    }
+    #about-ellipse-bg img { width: 100%; display: block; }
+
+    #koki-photo-wrap {
+      position: relative; flex-shrink: 0;
+      width: 223px; height: 223px;
+      border-radius: 50%;
+      background: #fff674;
+      border: 18px solid #fff;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #koki-photo-inner {
+      width: 188px; height: 188px;
+      border-radius: 50%; overflow: hidden;
+    }
+    #koki-photo-inner img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+    #koki-list {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .koki-item {
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wdth' 100;
+      font-size: 22px; color: #252525;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .koki-star { width: 20px; height: 20px; object-fit: contain; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ LANDING ══════════ -->
+  <div id="landing-section">
+    <div id="stage">
+      <div id="bg"></div>
+      <div id="grid"></div>
+
+
+      <p id="nav-portfolio" onclick="scrollToPortfolio()">WORK</p>
+      <p id="nav-about">ABOUT ME</p>
+
+      <!-- Pixel crosses -->
+      <div id="cross-purple" class="px-cross lnd-cross">
+        <span class="arm t"></span><span class="arm r"></span>
+        <span class="arm l"></span><span class="arm b"></span>
+        <span class="c"></span>
+      </div>
+      <div id="cross-orange" class="px-cross lnd-cross">
+        <span class="arm t"></span><span class="arm r"></span>
+        <span class="arm l"></span><span class="arm b"></span>
+        <span class="c"></span>
+      </div>
+      <div id="cross-pink" class="px-cross lnd-cross">
+        <span class="arm t"></span><span class="arm r"></span>
+        <span class="arm l"></span><span class="arm b"></span>
+        <span class="c"></span>
+      </div>
+      <div id="cross-teal" class="px-cross lnd-cross">
+        <span class="arm t"></span><span class="arm r"></span>
+        <span class="arm l"></span><span class="arm b"></span>
+        <span class="c"></span>
+      </div>
+      <div id="cross-orange2" class="px-cross lnd-cross">
+        <span class="arm t"></span><span class="arm r"></span>
+        <span class="arm l"></span><span class="arm b"></span>
+        <span class="c"></span>
+      </div>
+      <div id="cross-pink2" class="px-cross lnd-cross">
+        <span class="arm t"></span><span class="arm r"></span>
+        <span class="arm l"></span><span class="arm b"></span>
+        <span class="c"></span>
+      </div>
+
+      <!-- Cloud bottom -->
+      <div id="cloud-bottom">
+        <img src="cloud-PNG112251.png" alt="" />
+      </div>
+
+      <!-- Ticket -->
+      <div id="ticket-wrap">
+        <div class="flip-outer">
+          <div class="flipper">
+            <div class="face">
+              <img src="Ticket.svg" alt="" />
+            </div>
+            <div class="face face-back" onclick="scrollToPortfolio()" style="cursor:pointer;">
+              <img src="Ticket_flipped.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero tagline + pills -->
+      <div id="hero-bottom">
+        <p class="hero-tagline">Click to use your ticket past the surface level.</p>
+        <div class="hero-pills">
+          <span class="hero-pill purple">4+ years of experience</span>
+          <span class="hero-pill grey">previously at Parallel</span>
+          <span class="hero-pill purple">Now at <span style="color:#e9006f;">Verizon</span></span>
+          <div class="hero-pill-divider"></div>
+          <span class="hero-pill purple"><a href="https://www.linkedin.com/in/priyanka-godhwani-5552b11a2/" target="_blank">LinkedIn</a></span>
+          <span class="hero-pill purple"><a href="#" target="_blank">Resume</a></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ PORTFOLIO ══════════ -->
+  <div id="portfolio-section">
+    <div id="portfolio-stage">
+      <div class="p-grid"></div>
+
+      <!-- Portfolio pixel crosses -->
+
+      <!-- Top nav bar -->
+      <div class="p-nav p-nav-top">
+        <span class="p-nav-title" style="text-align:center; width:100%;">Design Thinking in Action</span>
+      </div>
+
+      <!-- ── Cards ── -->
+      <div class="p-cards">
+
+        <!-- Row 1 -->
+        <div class="p-row">
+
+          <!-- Card 1: Dell NCD -->
+          <div class="p-card-outer" onclick="window.location.href='dellncd.html'" style="cursor:pointer;">
+            <div class="p-card-inner blue">
+              <img class="p-gif"
+                src="Dell.gif"
+                alt="Rural Healthcare with Dell NCD" />
+              <div class="p-card-info">
+                <div class="p-card-logo-wrap">
+                  <img class="p-card-logo" src="dell-logo.png" alt="Dell" />
+                  <span class="p-card-title">Rural Healthcare<br>with Dell NCD</span>
+                </div>
+                <span class="p-card-arrow">↗</span>
+              </div>
+              <div class="p-tags">
+                <span class="p-tag blue">AI driven design</span>
+                <span class="p-tag blue">Visual design</span>
+                <span class="p-tag blue">Social Impact</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Urbanpiper -->
+          <div class="p-card-outer">
+            <div class="p-card-inner purple">
+              <img class="p-gif"
+                src="UP.gif"
+                alt="Urbanpiper POS systems" style="height:322px;" />
+              <div class="p-card-info">
+                <div class="p-card-logo-wrap">
+                  <img class="p-card-logo" src="UP-logo.png" alt="Urbanpiper" />
+                  <span class="p-card-title">Urbanpiper<br>POS systems</span>
+                </div>
+                <span class="p-card-arrow">↗</span>
+              </div>
+              <div class="p-tags">
+                <span class="p-tag purple">Design Strategy</span>
+                <span class="p-tag purple">Ecosystem design</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /Row 1 -->
+
+        <!-- Row 2 -->
+        <div class="p-row">
+
+          <!-- Card 3: IndusInd (wide) -->
+          <div class="p-card-outer" onclick="window.location.href='indusind.html'" style="width:709px; cursor:pointer;">
+            <div class="p-card-inner yellow" style="width:100%;">
+              <img class="p-gif-wide"
+                src="IndusInd.gif"
+                alt="Premium Credit Cards with IndusInd" style="height:280px; object-fit:cover;" />
+              <div class="p-card-info">
+                <div class="p-card-logo-wrap">
+                  <img class="p-card-logo" src="indusind-logo.png" alt="IndusInd Bank" />
+                  <span class="p-card-title">Premium Credit cards with IndusInd</span>
+                </div>
+                <span class="p-card-arrow">↗</span>
+              </div>
+              <div class="p-tags">
+                <span class="p-tag yellow">Fintech</span>
+                <span class="p-tag yellow">Credit cards</span>
+                <span class="p-tag yellow">Micro-animations</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: NDA (narrow, stretches to match row height) -->
+          <div class="p-card-outer" style="width:268px; display:flex; flex-direction:column; align-self:stretch;">
+            <div class="p-card-inner pink" style="flex:1; min-height:380px;">
+              <p class="p-nda-label">Under NDA 🔐</p>
+              <img class="p-nda-img" src="VB.png" alt="NDA project" />
+            </div>
+          </div>
+
+        </div><!-- /Row 2 -->
+
+      </div><!-- /Cards -->
+
+      <!-- Bottom nav bar -->
+
+    </div><!-- /portfolio-stage -->
+  </div><!-- /portfolio-section -->
+
+  <!-- ═══════════════════════════════════════════════════════ ABOUT ME SECTION -->
+  <div id="about-section">
+    <div id="about-stage">
+
+      <!-- Background -->
+      <div id="about-bg"></div>
+      <div class="about-grid"></div>
+
+      <!-- "About me" title -->
+      <div class="about-section-title" id="about-title-top">About me</div>
+
+      <!-- Polaroid: character (top-left) -->
+      <div class="polaroid" id="pol-char">
+        <img src="character2.png" alt="" />
+      </div>
+
+      <!-- Polaroid: sprite/creature (bottom-left) -->
+      <div class="polaroid" id="pol-sprite">
+        <img src="duck11.png" alt="" />
+      </div>
+
+      <!-- Polaroid: landscape (top-right) -->
+      <div class="polaroid" id="pol-landscape">
+        <img src="landscape11.png" alt="" />
+      </div>
+
+      <!-- Polaroid: duck (bottom-right) -->
+      <div class="polaroid" id="pol-duck">
+        <img src="duck22.png" alt="" />
+      </div>
+
+      <!-- Centre bio card -->
+      <div id="about-bio-card">
+        <div id="about-bio-photo">
+          <img src="Priyanka.jpg" alt="" />
+        </div>
+        <div id="about-bio-text">
+          With over 4+ years of experience, I have dived deep into multitudes of industries and created strategic designs. Welcome to my gallery/resume I made while having a little fun with Figma Make, Framer and a bunch of other tools.
+          <br/><br/>
+          I have grown up playing a lot of competitive games and still get excited when my brother calls me on a game and somewhere through this journey I have learnt communication, depth and understanding of complex systems and how I want to experience them every time I pick up a design challenge.
+        </div>
+      </div>
+
+      <!-- "My little helper" title -->
+      <div class="about-section-title" id="about-title-helper">Purr-sonal Design Assistant</div>
+
+      <!-- Koki (cat) card -->
+      <div id="koki-card">
+        <div id="about-ellipse-bg"><img src="about-ellipse2.png" alt="" /></div>
+        <div id="koki-photo-wrap">
+          <div id="koki-photo-inner">
+            <img src="koki-no-bg.png" alt="" />
+          </div>
+        </div>
+        <div id="koki-list">
+          <div class="koki-item">Design inspector <img src="star-separator.png" class="koki-star" alt="★" /></div>
+          <div class="koki-item">Commission in treats <img src="star-separator.png" class="koki-star" alt="★" /></div>
+          <div class="koki-item">Pawsitive reinforcements <img src="star-separator.png" class="koki-star" alt="★" /></div>
+        </div>
+      </div>
+
+    </div><!-- /about-stage -->
+  </div><!-- /about-section -->
+
+  <!-- ═══════════════════════════════════════════════════════ MORE WORKS SECTION -->
+  <div id="moreworks-section">
+    <div id="moreworks-stage">
+
+      <div class="mw-grid"></div>
+
+      <!-- Ellipse decoration -->
+      <div id="mw-ellipse"><img src="mw-ellipse.png" alt="" /></div>
+
+      <!-- Title -->
+      <div id="mw-title">More works</div>
+
+      <!-- Cards -->
+      <div id="mw-cards">
+
+        <!-- Card 1: Humanising Feedback with CLO -->
+        <div class="mw-card">
+          <div class="mw-card-img" id="mw-card1-img">
+            <img src="CLO-video.gif" alt="" />
+          </div>
+          <div class="mw-card-body">
+            <div class="mw-card-title">Humanising Feedback with CLO</div>
+            <div class="mw-card-desc">A character-driven approach to sensitive feedback management. Built to establish user trust and make difficult workplace conversations more approachable.</div>
+            <div class="mw-tags">
+              <span class="mw-tag">Visual design</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Simplifying Data Systems -->
+        <div class="mw-card">
+          <div class="mw-card-img" id="mw-card2-img">
+            <img src="CEGIS-1.png" alt="" />
+          </div>
+          <div class="mw-card-body">
+            <div class="mw-card-title">Simplifying Data Systems for Government Scale</div>
+            <div class="mw-card-desc">Designing clear, user-friendly data visualisations to help department heads monitor attendance status and track critical performance metrics without information overload.</div>
+            <div class="mw-tags">
+              <span class="mw-tag">Information Architecture</span>
+              <span class="mw-tag">GovTech</span>
+              <span class="mw-tag">Research</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /mw-cards -->
+
+    </div><!-- /moreworks-stage -->
+  </div><!-- /moreworks-section -->
+
+  <!-- ═══════════════════════════════════════════════════════ PLOTTING THE PIXELS -->
+  <div id="pixels-section">
+    <div id="pixels-stage">
+
+      <div class="px-grid"></div>
+
+      <!-- Title -->
+      <div id="pixels-title">
+        <span id="pixels-title-lobster">Plotting the </span>
+        <span id="pixels-title-mono">Pixels</span>
+      </div>
+
+      <!-- Cards -->
+      <div id="pixels-cards">
+
+        <!-- Card 1 -->
+        <div class="px-card">
+          <div class="px-card-text">
+            I <strong>align on product positioning</strong> and business goals before sketching a single screen.
+          </div>
+          <div class="px-card-img px-card-img-fit"><img src="first-ill.png" alt="" /></div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="px-card">
+          <div class="px-card-text">
+            I diverge to uncover every possibility, then converge to find the singular solution.
+          </div>
+          <div class="px-card-img px-card-img-fit"><img src="second-ill.png" alt="" /></div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="px-card">
+          <div class="px-card-text">
+            Asking "why" at every step is how I cut through the noise and uncover the core user problem.
+          </div>
+          <div class="px-card-img px-card-img-fit"><img src="third-ill.png" alt="" /></div>
+        </div>
+
+      </div><!-- /pixels-cards -->
+
+    </div><!-- /pixels-stage -->
+  </div><!-- /pixels-section -->
+
+  <!-- ═══════════════════════════════════════════════════════ FOOTER -->
+  <footer id="site-footer">
+    <span class="footer-title">Collaborate with me :)</span>
+    <div class="footer-links">
+      <a class="footer-email" href="mailto:pgodhwani99@gmail.com">pgodhwani99@gmail.com</a>
+    </div>
+  </footer>
+
+  <script>
+    function scaleStage() {
+      // Landing: scale to fill viewport width, height = scaled stage height
+      var s = window.innerWidth / 1440;
+      document.getElementById('stage').style.transform = 'scale(' + s + ')';
+      document.getElementById('landing-section').style.height = (840 * s) + 'px';
+
+      // Portfolio: scale to fill viewport width
+      var ps = window.innerWidth / 1440;
+      var pStage = document.getElementById('portfolio-stage');
+      pStage.style.transform = 'scale(' + ps + ')';
+      document.getElementById('portfolio-section').style.height = (1250 * ps) + 'px';
+
+      // About Me: scale to fill viewport width
+      var as = window.innerWidth / 1440;
+      var aStage = document.getElementById('about-stage');
+      aStage.style.transform = 'scale(' + as + ')';
+      document.getElementById('about-section').style.height = (1331 * as) + 'px';
+
+      // More Works: scale to fill viewport width
+      var ms = window.innerWidth / 1440;
+      var mStage = document.getElementById('moreworks-stage');
+      mStage.style.transform = 'scale(' + ms + ')';
+      document.getElementById('moreworks-section').style.height = (780 * ms) + 'px';
+
+      // Plotting the Pixels: scale to fill viewport width
+      var pxs = window.innerWidth / 1440;
+      var pxStage = document.getElementById('pixels-stage');
+      pxStage.style.transform = 'scale(' + pxs + ')';
+      document.getElementById('pixels-section').style.height = (460 * pxs) + 'px';
+    }
+
+    scaleStage();
+    window.addEventListener('resize', scaleStage);
+
+    function scrollToPortfolio() {
+      document.getElementById('portfolio-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
