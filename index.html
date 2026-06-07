@@ -308,6 +308,37 @@
     .footer-email:hover { text-decoration: underline; }
 
     /* ─────────────── PLOTTING THE PIXELS ─────────────── */
+    /* ── Separator ── */
+    #sep-section {
+      position: relative; width: 100vw; overflow: hidden;
+    }
+    #sep-stage {
+      position: absolute; top: 0; left: 0;
+      width: 1440px; height: 200px;
+      transform-origin: top left;
+      background: #faf0ff;
+      overflow: hidden;
+    }
+    .sep-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(89,104,194,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89,104,194,0.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+    #sep-bg {
+      position: absolute; left: 50px; top: -620px;
+      width: 1337px; height: 1440px;
+      opacity: 0.25; pointer-events: none;
+    }
+    #sep-bg img { width: 100%; height: 100%; display: block; }
+    #sep-wave {
+      position: absolute; bottom: 0; left: 0;
+      width: 1440px; height: 117.544px;
+      pointer-events: none;
+    }
+    #sep-wave img { width: 100%; height: 100%; display: block; }
+
     #pixels-section {
       position: relative; width: 100vw; overflow: hidden;
     }
@@ -885,6 +916,15 @@
     </div><!-- /moreworks-stage -->
   </div><!-- /moreworks-section -->
 
+  <!-- ══════════ SEPARATOR ══════════ -->
+  <div id="sep-section">
+    <div id="sep-stage">
+      <div class="sep-grid"></div>
+      <div id="sep-bg"><img src="assets/separator-bg.svg" alt="" /></div>
+      <div id="sep-wave"><img src="assets/separator-wave.svg" alt="" /></div>
+    </div>
+  </div><!-- /sep-section -->
+
   <!-- ═══════════════════════════════════════════════════════ PLOTTING THE PIXELS -->
   <div id="pixels-section">
     <div id="pixels-stage">
@@ -961,6 +1001,12 @@
       var mStage = document.getElementById('moreworks-stage');
       mStage.style.transform = 'scale(' + ms + ')';
       document.getElementById('moreworks-section').style.height = (780 * ms) + 'px';
+
+      // Separator
+      var ss = window.innerWidth / 1440;
+      var sepStage = document.getElementById('sep-stage');
+      sepStage.style.transform = 'scale(' + ss + ')';
+      document.getElementById('sep-section').style.height = (200 * ss) + 'px';
 
       // Plotting the Pixels: scale to fill viewport width
       var pxs = window.innerWidth / 1440;
