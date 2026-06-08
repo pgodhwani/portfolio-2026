@@ -416,7 +416,7 @@
     }
     #moreworks-stage {
       position: absolute; top: 0; left: 0;
-      width: 1440px; height: 780px;
+      width: 1440px; height: 660px;
       transform-origin: top left;
       background: linear-gradient(to bottom, #F3FFFC, #FAF0FF);
     }
@@ -740,7 +740,7 @@
           </div>
 
           <!-- Card 2: Urbanpiper -->
-          <div class="p-card-outer">
+          <div class="p-card-outer" onclick="window.open('https://www.figma.com/proto/I5oqpp9wXUb0u6lZMFCgms/SELECTED-WORKS?page-id=5%3A185811&node-id=104-110384&viewport=7280%2C2931%2C0.18&t=oI9YCVhGeti7e90K-8&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=104%3A110384&show-proto-sidebar=1&hide-ui=1','_blank')" style="cursor:pointer;">
             <div class="p-card-inner purple">
               <img class="p-gif"
                 src="assets/UP.gif"
@@ -921,7 +921,11 @@
     <div id="sep-stage">
       <div class="sep-grid"></div>
       <div id="sep-bg"><img src="assets/separator-bg.svg" alt="" /></div>
-      <div id="sep-wave"><img src="assets/separator-wave.svg" alt="" /></div>
+      <div id="sep-wave">
+        <svg preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 1440 117.544" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0 64.1105C29.43 86.2427 64.1745 103.78 119.1 103.78C269.1 103.78 269.1 45.4379 419.1 45.4379C569.1 45.4379 569.1 105.058 719.1 105.058C869.1 105.058 869.1 0 1019.1 0C1169.1 0 1169.1 101.366 1319.1 101.366C1375.57 101.366 1410.03 96.1364 1440 89.6166V117.544H0V64.1105Z" fill="#E8FAFF"/>
+        </svg>
+      </div>
     </div>
   </div><!-- /sep-section -->
 
@@ -1000,7 +1004,7 @@
       var ms = window.innerWidth / 1440;
       var mStage = document.getElementById('moreworks-stage');
       mStage.style.transform = 'scale(' + ms + ')';
-      document.getElementById('moreworks-section').style.height = (780 * ms) + 'px';
+      document.getElementById('moreworks-section').style.height = (660 * ms) + 'px';
 
       // Separator
       var ss = window.innerWidth / 1440;
