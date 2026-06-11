@@ -145,6 +145,25 @@
     .face-back { transform: rotateY(180deg); }
 
     /* ─────────────── PORTFOLIO ─────────────── */
+    /* ── Landing → Portfolio cloud separator ── */
+    #lndsep-section {
+      position: relative; width: 100vw; overflow: hidden;
+    }
+    #lndsep-stage {
+      position: absolute; top: 0; left: 0;
+      width: 1440px; height: 295px;
+      transform-origin: top left;
+      background: #4DB9F9;
+    }
+    .lndsep-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
+      background-size: 100px 100px;
+    }
+    #lndsep-stage img { display: block; position: absolute; pointer-events: none; }
+
     #portfolio-section {
       position: relative; width: 100vw; overflow: hidden;
     }
@@ -692,6 +711,25 @@
 
   </div>
 
+  <!-- ══════════ LANDING → PORTFOLIO CLOUD SEPARATOR ══════════ -->
+  <div id="lndsep-section">
+    <div id="lndsep-stage">
+      <div class="lndsep-grid"></div>
+      <!-- cloud-a: large left -->
+      <img src="assets/cloud-x.png" style="left:42px; top:27px; width:303px;" />
+      <!-- cloud-a: centre, h-flipped -->
+      <img src="assets/cloud-x.png" style="left:763px; top:75px; width:348px; transform:scaleX(-1);" />
+      <!-- cloud-a: small right, h-flipped -->
+      <img src="assets/cloud-x.png" style="left:1076px; top:29px; width:74px; transform:scaleX(-1);" />
+      <!-- cloud-b: far right -->
+      <img src="assets/cloud-y.png" style="left:1164px; top:38px; width:189px;" />
+      <!-- cloud-b: centre-left, h-flipped -->
+      <img src="assets/cloud-y.png" style="left:396px; top:146px; width:167px; transform:scaleX(-1);" />
+      <!-- cloud-b: small left, h-flipped -->
+      <img src="assets/cloud-y.png" style="left:319px; top:223px; width:81px; transform:scaleX(-1);" />
+    </div>
+  </div>
+
   <!-- ══════════ PORTFOLIO ══════════ -->
   <div id="portfolio-section">
     <div id="portfolio-stage">
@@ -979,6 +1017,11 @@
       var s = window.innerWidth / 1440;
       document.getElementById('stage').style.transform = 'scale(' + s + ')';
       document.getElementById('landing-section').style.height = (840 * s) + 'px';
+
+      // Landing→Portfolio cloud separator
+      var lsep = window.innerWidth / 1440;
+      document.getElementById('lndsep-stage').style.transform = 'scale(' + lsep + ')';
+      document.getElementById('lndsep-section').style.height = (295 * lsep) + 'px';
 
       // Portfolio: scale to fill viewport width
       var ps = window.innerWidth / 1440;
